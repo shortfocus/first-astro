@@ -1,0 +1,29 @@
+---
+import { siteConfig } from "@/config/site.config";
+
+const { hero } = siteConfig;
+---
+
+<section class="bg-slate-950">
+  <div class="mx-auto max-w-6xl px-6 py-32 text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-slate-100 md:text-6xl">
+      {hero.title}
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-base text-slate-400 md:text-lg">
+      {hero.subtitle}
+    </p>
+
+    <div class="mt-10">
+      <a
+        href="/contact"
+        class="inline-flex items-center
+          rounded-lg bg-cyan-500 px-6 py-3
+          text-sm font-semibold text-slate-950
+          hover:bg-cyan-400 transition"
+      >
+        {hero.ctaText}
+      </a>
+    </div>
+  </div>
+</section>

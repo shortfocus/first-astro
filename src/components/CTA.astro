@@ -1,0 +1,20 @@
+---
+import { siteConfig } from "@/config/site.config";
+
+const { cta } = siteConfig;
+---
+
+<section class="border-t border-slate-800 bg-slate-950">
+  <div class="mx-auto max-w-6xl px-6 py-24 text-center">
+    <h2 class="text-3xl font-bold text-slate-100">
+      {cta.title}
+    </h2>
+
+    <a
+      href="#"
+      class="mt-8 inline-flex items-center justify-center rounded-lg bg-cyan-400 px-8 py-4 text-sm font-semibold text-slate-900 transition hover:bg-cyan-300"
+    >
+      {cta.buttonText}
+    </a>
+  </div>
+</section>
