@@ -1,21 +1,25 @@
 ---
 import { siteConfig } from "@/config/site.config";
-
-const { features } = siteConfig;
 ---
 
-<section class="bg-slate-950 border-t border-slate-800">
-  <div class="mx-auto max-w-6xl px-6 py-24">
-    <div class="grid gap-10 md:grid-cols-3">
+<section id="features" class="border-t border-slate-800 bg-slate-950">
+  <div class="mx-auto max-w-6xl px-6 py-20">
+    <h2 class="text-center text-3xl font-bold text-slate-100">
+      왜 솔리드웹인가요?
+    </h2>
+
+    <p class="mt-4 text-center text-slate-400">
+      불필요한 건 빼고, 성과에만 집중합니다
+    </p>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
-        features.map((feature) => (
-          <div class="rounded-xl border border-slate-800 bg-slate-900 p-6">
+        siteConfig.features.map((feature) => (
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500 transition">
             <h3 class="text-lg font-semibold text-slate-100">
               {feature.title}
             </h3>
-            <p class="mt-2 text-sm text-slate-400 leading-relaxed">
-              {feature.description}
-            </p>
+            <p class="mt-2 text-sm text-slate-400">{feature.description}</p>
           </div>
         ))
       }

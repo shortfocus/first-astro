@@ -12,6 +12,11 @@ import { siteConfig } from "@/config/site.config";
     <meta name="viewport" content="width=device-width" />
     <title>{siteConfig.name}</title>
     <meta name="description" content={siteConfig.description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={siteConfig.name} />
+    <meta property="og:description" content={siteConfig.description} />
+    <meta property="og:type" content="website" />
   </head>
   <body class="flex min-h-screen flex-col bg-slate-950 text-slate-100">
     <Header />
