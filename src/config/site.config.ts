@@ -24,4 +24,10 @@ export const siteConfig = {
     title: "지금 바로 시작하세요",
     buttonText: "상담 요청",
   },
+  /**
+   * 카카오톡 채널 1:1 채팅 URL
+   * 형식: https://pf.kakao.com/_채널ID/chat (채널ID 앞에 _ 필수)
+   * 정확한 주소: center-pf.kakao.com → 프로필 → 프로필 설정 → "채팅 링크" 복사
+   */
+  kakaoChatUrl: "http://pf.kakao.com/_xkxmzqX",
 } as const;

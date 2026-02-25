@@ -1,0 +1,40 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+const { href = "/", label = "카카오톡 상담" } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={label}
+  class="kakao-floating group fixed bottom-6 right-6 z-50 flex h-14 w-14 min-w-[3.5rem] min-h-[3.5rem] items-center justify-center rounded-full bg-[#FEE500] shadow-lg transition-all hover:scale-110 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#FEE500] focus:ring-offset-2 focus:ring-offset-slate-950 overflow-visible"
+>
+  <!-- 카카오톡 말풍선 아이콘 -->
+  <svg
+    class="h-6 w-6 shrink-0 text-[#191919]"
+    viewBox="-1 -1 26 26"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      d="M12 2C6.48 2 2 6.15 2 11.25c0 3.43 1.82 6.44 4.57 8.18-.15.55-.98 3.32-1.02 3.59-.05.32.12.32.27.22.12-.08 1.94-1.28 2.73-1.8.44.06.89.09 1.35.09 5.52 0 10-4.15 10-9.25S17.52 2 12 2z"
+    />
+  </svg>
+  <span class="sr-only">{label}</span>
+</a>
+
+<style>
+  .kakao-floating {
+    -webkit-tap-highlight-color: transparent;
+  }
+  .kakao-floating svg {
+    overflow: visible;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>
