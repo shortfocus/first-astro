@@ -24,44 +24,26 @@ import { siteConfig } from "@/config/site.config";
       <slot />
     </main>
     <Footer />
-    <!-- 채널 채팅 버튼 (위) -->
-    <div
-      id="kakao-talk-channel-chat-button"
-      class="fixed bottom-24 right-6 z-50"
-      data-channel-public-id="_xkxmzqX"
-      data-title="consult"
-      data-size="large"
-      data-color="yellow"
-      data-shape="pc"
-      data-support-multiple-densities="true"
-    ></div>
-    <!-- 채널 추가 버튼 (아래) -->
-    <div
-      id="kakao-talk-channel-add-button"
-      class="fixed bottom-6 right-6 z-50"
-      data-channel-public-id="_xkxmzqX"
-      data-size="large"
-      data-support-multiple-densities="true"
-    ></div>
+    <!-- 카카오톡 플로팅: 클릭 시 카카오 페이지로 바로 이동 -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+      <a
+        href="https://pf.kakao.com/_xkxmzqX/chat"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-1.5 rounded-full bg-[#FEE500] px-5 py-3 text-[#191919] shadow-lg transition hover:scale-105 hover:shadow-xl"
+        aria-label="톡상담"
+      >
+        <span class="text-sm font-bold">톡상담</span>
+      </a>
+      <a
+        href="https://pf.kakao.com/_xkxmzqX"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center gap-1.5 rounded-full bg-[#FEE500] px-5 py-3 text-[#191919] shadow-lg transition hover:scale-105 hover:shadow-xl"
+        aria-label="채널 추가"
+      >
+        <span class="text-sm font-bold">채널 추가</span>
+      </a>
+    </div>
   </body>
-  <script is:inline>
-    window.kakaoAsyncInit = function() {
-      Kakao.Channel.createChatButton({
-        container: '#kakao-talk-channel-chat-button',
-      });
-      Kakao.Channel.createAddChannelButton({
-        container: '#kakao-talk-channel-add-button',
-      });
-    };
-
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.channel.min.js';
-      js.integrity = 'sha384-8oNFBbAHWVovcMLgR+mLbxqwoucixezSAzniBcjnEoumhfIbMIg4DrVsoiPEtlnt';
-      js.crossOrigin = 'anonymous';
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, 'script', 'kakao-js-sdk');
-  </script>
 </html>
