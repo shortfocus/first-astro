@@ -4,8 +4,8 @@ import { siteConfig } from "@/config/site.config";
 const pathname = Astro.url.pathname;
 const navItems = siteConfig.nav.items ?? [
   { label: siteConfig.name, href: "/" },
-  { label: "포트폴리오", href: "#portfolio" },
-  { label: siteConfig.nav.consult, href: "#contact" },
+  { label: "포트폴리오", href: "/portfolio" },
+  { label: siteConfig.nav.consult, href: "/contact" },
   { label: "스타트업 트랙", href: "#startup-track" },
 ];
 
@@ -91,12 +91,16 @@ function isActive(href: string): boolean {
     toggle.addEventListener("click", () => menu.classList.toggle("hidden"));
   }
 
-  function setActiveByHash() {
-    const currentHash = window.location.hash || "";
+  function setActiveNav() {
+    const pathname = window.location.pathname || "/";
+    const hash = window.location.hash || "";
     document.querySelectorAll(".nav-link").forEach((el) => {
       const link = el as HTMLAnchorElement;
       const href = link.getAttribute("data-href") || "";
-      const isActive = currentHash === "" ? href === "/" : href === currentHash;
+      const isPath = href.startsWith("/") && !href.startsWith("//");
+      const isActive = isPath
+        ? (pathname === href || pathname === href + "/")
+        : (hash === "" ? href === "/" : href === hash);
       link.classList.toggle("border-white", isActive);
       link.classList.toggle("border-transparent", !isActive);
       link.classList.toggle("text-white", isActive);
@@ -104,6 +108,7 @@ function isActive(href: string): boolean {
       link.setAttribute("aria-current", isActive ? "page" : "false");
     });
   }
-  setActiveByHash();
-  window.addEventListener("hashchange", setActiveByHash);
+  setActiveNav();
+  window.addEventListener("hashchange", setActiveNav);
+  window.addEventListener("popstate", setActiveNav);
 </script>

@@ -4,6 +4,15 @@ export default {
     content: ["./src/**/*.{astro,html,js,jsx,ts,tsx}"],
   theme: {
   	extend: {
+  		keyframes: {
+  			"marquee-vertical": {
+  				from: { transform: "translateY(0)" },
+  				to: { transform: "translateY(-50%)" },
+  			},
+  		},
+  		animation: {
+  			"marquee-vertical": "marquee-vertical var(--duration, 120s) linear infinite",
+  		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
