@@ -1,46 +1,39 @@
 ---
 import { siteConfig } from "@/config/site.config";
 import HeroCanvas from "@/components/HeroCanvas";
+import HeroCtaButton from "@/components/HeroCtaButton";
 ---
 
 <section class="relative overflow-hidden bg-[#0d0d0d]">
-  <div class="mx-auto max-w-4xl px-6 pt-20 pb-10 md:pt-28 md:pb-14">
-    <div class="mb-14 md:mb-20">
-      <h1 class="text-3xl font-normal leading-[1.2] tracking-tight text-white sm:text-4xl md:text-5xl md:tracking-[-0.02em]">
+  <div class="mx-auto max-w-6xl px-4 pt-16 pb-8 sm:px-6 sm:pt-20 sm:pb-10 md:pt-28 md:pb-14">
+    <div class="mb-10 sm:mb-14 md:mb-20">
+      <h1 class="text-2xl font-bold leading-[1.25] tracking-tight text-white sm:text-4xl sm:leading-[1.2] md:text-5xl md:tracking-[-0.02em]">
         {siteConfig.hero.title}
       </h1>
-      <p class="mt-8 max-w-xl text-base text-slate-500 leading-relaxed">
-        {siteConfig.hero.subtitle}
+      <p class="mt-6 max-w-[65ch] text-[15px] font-bold leading-relaxed text-slate-400 sm:mt-8 sm:text-base sm:leading-relaxed md:max-w-none md:text-lg">
+        {siteConfig.hero.subtitleMain}
+        <br />
+        <span class="inline md:whitespace-nowrap">{siteConfig.hero.subtitleEnd}</span>
       </p>
-      <a
-        href="#contact"
-        class="mt-10 inline-block text-sm text-slate-400 underline underline-offset-4 decoration-slate-600 hover:text-slate-300 hover:decoration-slate-500 transition"
-      >
+      {siteConfig.hero.support && (
+        <p class="mt-4 text-xs text-slate-500 sm:mt-5 sm:text-sm">
+          {siteConfig.hero.support}
+        </p>
+      )}
+      <HeroCtaButton client:load href="#contact">
         {siteConfig.hero.ctaText}
-      </a>
+      </HeroCtaButton>
     </div>
 
     <div class="relative w-full">
-      <div class="relative flex min-h-[22rem] w-full items-center justify-center rounded-2xl border border-white/[0.06] md:min-h-[28rem]">
-        <div class="absolute inset-0 overflow-hidden rounded-2xl">
+      <div class="relative flex min-h-[18rem] w-full items-center justify-center rounded-xl border border-white/[0.06] sm:min-h-[22rem] sm:rounded-2xl md:min-h-[28rem]">
+        <div class="absolute inset-0 overflow-hidden rounded-xl sm:rounded-2xl">
           <HeroCanvas client:load />
         </div>
-        <span class="font-logo relative z-10 text-3xl font-normal tracking-tight text-[#0D0D0D] md:text-5xl md:tracking-[-0.02em]">
+        <span class="font-logo relative z-10 text-2xl font-normal tracking-tight text-[#0D0D0D] sm:text-3xl md:text-5xl md:tracking-[-0.02em]">
           {siteConfig.name}
         </span>
       </div>
-    </div>
-  </div>
-
-  <div class="mx-auto max-w-4xl px-6 pb-16 pt-12">
-    <div class="flex flex-wrap gap-6 text-[13px] text-slate-600">
-      {
-        siteConfig.filter.map((item) => (
-          <a href="#" class="hover:text-slate-400 transition">
-            {item}
-          </a>
-        ))
-      }
     </div>
   </div>
 </section>

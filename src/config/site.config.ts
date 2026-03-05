@@ -2,14 +2,15 @@ export const siteConfig = {
   name: "solidweb",
   description: "생각을 응원하는 곳, 우리와 함께합니다.",
   hero: {
-    title: "생각을 응원하는 곳 우리와 함께합니다.",
-    subtitle: "더 나은 비즈니스 환경을 위해 노력합니다.",
-    ctaText: "서비스 문의",
+    title: "보여주는 웹이 아니라, 결과를 만드는 웹을.",
+    subtitleMain: "전략 기획부터 전환 설계, 성과 측정까지 한 번에.",
+    subtitleEnd: "디자인을 넘어 비즈니스 성과로 직결되는 웹을 제작하고, 방문을 고객으로 노출을 매출로 이어드는 구조를 설계합니다.",
+    support: "",
+    ctaText: "무료 상담 신청하기",
   },
   nav: {
     consult: "상담 신청",
   },
-  filter: ["전체보기", "솔루션", "웹/앱", "브랜딩", "마케팅"],
   whatWeDo: {
     title: "01 What We Do",
     subtitle: "우리는 다양한 분야에서 차별화된 비즈니스를 제공합니다.",
