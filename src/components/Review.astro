@@ -10,149 +10,127 @@ const items = siteConfig.review.items;
       <h2 class="text-2xl font-bold text-white md:text-3xl">
         <span class="text-[#f43f5e]">04</span> Review
       </h2>
-      <p class="mt-3 text-slate-400">
-        {siteConfig.review.subtitle}
-      </p>
+      <p class="mt-3 text-slate-400">{siteConfig.review.subtitle}</p>
     </div>
 
-    <div class="mt-14 flex w-full min-w-0 flex-col items-center justify-center gap-4">
-      <div class="relative flex h-[600px] w-full min-w-0 max-w-full flex-row items-center justify-center overflow-x-hidden overflow-y-hidden rounded-lg px-2 md:px-4">
-        <div class="flex min-w-0 flex-1 flex-row items-stretch gap-2 md:gap-3">
-          <!-- 마키 컬럼 1: 사선 (우하→좌상) -->
-          <div class="group flex max-h-[600px] min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-800 bg-slate-900/20 p-2">
-            <div
-              class="flex shrink-0 flex-col gap-4 animate-marquee-diagonal group-hover:[animation-play-state:paused]"
-              style="--duration: 120s"
-            >
+    <!-- 참고 소스 구조: flex-col justify-center items-center → perspective 컨테이너 → 3D transform → 3개 marquee -->
+    <div class="mt-14 flex flex-col flex-nowrap items-center justify-center gap-4">
+      <div
+        class="relative flex h-[600px] w-full flex-row items-center justify-center gap-1.5 overflow-hidden rounded-lg px-6 md:px-8"
+        style="perspective: 1000px;"
+      >
+        <div
+          class="flex flex-row items-center gap-2"
+          style="transform: translateX(0) translateY(0) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg);"
+        >
+          <!-- 마키 1 -->
+          <div
+            class="group flex flex-col overflow-hidden p-2"
+            style="--gap: 1rem; --duration: 120s;"
+            role="marquee"
+            aria-live="off"
+            tabindex="0"
+          >
+            <div class="flex shrink-0 flex-col justify-around gap-4 animate-marquee-vertical group-hover:[animation-play-state:paused]" style="gap: var(--gap);">
               {items.map((r) => (
-                <div class="flex flex-1 flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
+                <div class="flex flex-1 flex-col gap-6 rounded-xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
                   <div class="px-6">
                     <div class="flex items-center gap-2.5">
                       <div class="flex flex-col">
-                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">
-                          {r.author}
-                        </figcaption>
-                        {r.subtitle && (
-                          <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>
-                        )}
+                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">{r.author}</figcaption>
+                        {r.subtitle && <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>}
                       </div>
                     </div>
-                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">
-                      {r.quote}
-                    </blockquote>
+                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">{r.quote}</blockquote>
                   </div>
                 </div>
               ))}
               {items.map((r) => (
-                <div class="flex flex-1 flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
+                <div class="flex flex-1 flex-col gap-6 rounded-xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
                   <div class="px-6">
                     <div class="flex items-center gap-2.5">
                       <div class="flex flex-col">
-                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">
-                          {r.author}
-                        </figcaption>
-                        {r.subtitle && (
-                          <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>
-                        )}
+                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">{r.author}</figcaption>
+                        {r.subtitle && <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>}
                       </div>
                     </div>
-                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">
-                      {r.quote}
-                    </blockquote>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <!-- 마키 컬럼 2: 사선 역방향 -->
-          <div class="group flex max-h-[600px] min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-800 bg-slate-900/20 p-2">
-            <div
-              class="flex shrink-0 flex-col gap-4 animate-marquee-diagonal [animation-direction:reverse] group-hover:[animation-play-state:paused]"
-              style="--duration: 100s"
-            >
-              {items.map((r) => (
-                <div class="flex flex-1 flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
-                  <div class="px-6">
-                    <div class="flex items-center gap-2.5">
-                      <div class="flex flex-col">
-                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">
-                          {r.author}
-                        </figcaption>
-                        {r.subtitle && (
-                          <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>
-                        )}
-                      </div>
-                    </div>
-                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">
-                      {r.quote}
-                    </blockquote>
-                  </div>
-                </div>
-              ))}
-              {items.map((r) => (
-                <div class="flex flex-1 flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
-                  <div class="px-6">
-                    <div class="flex items-center gap-2.5">
-                      <div class="flex flex-col">
-                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">
-                          {r.author}
-                        </figcaption>
-                        {r.subtitle && (
-                          <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>
-                        )}
-                      </div>
-                    </div>
-                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">
-                      {r.quote}
-                    </blockquote>
+                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">{r.quote}</blockquote>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <!-- 마키 컬럼 3: 사선 -->
-          <div class="group flex max-h-[600px] min-w-0 flex-1 flex-col overflow-hidden rounded-xl border border-slate-800 bg-slate-900/20 p-2">
-            <div
-              class="flex shrink-0 flex-col gap-4 animate-marquee-diagonal group-hover:[animation-play-state:paused]"
-              style="--duration: 110s"
-            >
+          <!-- 마키 2 (역방향) -->
+          <div
+            class="group flex flex-col overflow-hidden p-2"
+            style="--gap: 1rem; --duration: 120s;"
+            role="marquee"
+            aria-live="off"
+            tabindex="0"
+          >
+            <div class="flex shrink-0 flex-col justify-around gap-4 animate-marquee-vertical group-hover:[animation-play-state:paused] [animation-direction:reverse]" style="gap: var(--gap);">
               {items.map((r) => (
-                <div class="flex flex-1 flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
+                <div class="flex flex-1 flex-col gap-6 rounded-xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
                   <div class="px-6">
                     <div class="flex items-center gap-2.5">
                       <div class="flex flex-col">
-                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">
-                          {r.author}
-                        </figcaption>
-                        {r.subtitle && (
-                          <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>
-                        )}
+                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">{r.author}</figcaption>
+                        {r.subtitle && <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>}
                       </div>
                     </div>
-                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">
-                      {r.quote}
-                    </blockquote>
+                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">{r.quote}</blockquote>
                   </div>
                 </div>
               ))}
               {items.map((r) => (
-                <div class="flex flex-1 flex-col gap-4 rounded-2xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
+                <div class="flex flex-1 flex-col gap-6 rounded-xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
                   <div class="px-6">
                     <div class="flex items-center gap-2.5">
                       <div class="flex flex-col">
-                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">
-                          {r.author}
-                        </figcaption>
-                        {r.subtitle && (
-                          <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>
-                        )}
+                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">{r.author}</figcaption>
+                        {r.subtitle && <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>}
                       </div>
                     </div>
-                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">
-                      {r.quote}
-                    </blockquote>
+                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">{r.quote}</blockquote>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- 마키 3 -->
+          <div
+            class="group flex flex-col overflow-hidden p-2"
+            style="--gap: 1rem; --duration: 120s;"
+            role="marquee"
+            aria-live="off"
+            tabindex="0"
+          >
+            <div class="flex shrink-0 flex-col justify-around gap-4 animate-marquee-vertical group-hover:[animation-play-state:paused]" style="gap: var(--gap);">
+              {items.map((r) => (
+                <div class="flex flex-1 flex-col gap-6 rounded-xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
+                  <div class="px-6">
+                    <div class="flex items-center gap-2.5">
+                      <div class="flex flex-col">
+                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">{r.author}</figcaption>
+                        {r.subtitle && <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>}
+                      </div>
+                    </div>
+                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">{r.quote}</blockquote>
+                  </div>
+                </div>
+              ))}
+              {items.map((r) => (
+                <div class="flex flex-1 flex-col gap-6 rounded-xl border border-slate-700 bg-slate-900/40 py-6 shadow-sm">
+                  <div class="px-6">
+                    <div class="flex items-center gap-2.5">
+                      <div class="flex flex-col">
+                        <figcaption class="flex items-center gap-1 text-sm font-medium text-white">{r.author}</figcaption>
+                        {r.subtitle && <p class="text-xs font-medium text-slate-500">{r.subtitle}</p>}
+                      </div>
+                    </div>
+                    <blockquote class="mt-3 whitespace-pre-line break-keep text-sm leading-relaxed text-slate-400">{r.quote}</blockquote>
                   </div>
                 </div>
               ))}
@@ -160,11 +138,11 @@ const items = siteConfig.review.items;
           </div>
         </div>
 
-        <!-- 사선 페이드: 좌상·우하 + 좌우 -->
+        <!-- 그라데이션: 참고 소스처럼 좌우·상하 -->
+        <div class="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#0d0d0d] to-transparent" aria-hidden="true" />
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#0d0d0d] to-transparent" aria-hidden="true" />
         <div class="pointer-events-none absolute inset-x-0 top-0 h-1/4 w-full bg-gradient-to-b from-[#0d0d0d] to-transparent" aria-hidden="true" />
         <div class="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 w-full bg-gradient-to-t from-[#0d0d0d] to-transparent" aria-hidden="true" />
-        <div class="pointer-events-none absolute left-0 inset-y-0 w-1/5 bg-gradient-to-r from-[#0d0d0d] to-transparent" aria-hidden="true" />
-        <div class="pointer-events-none absolute right-0 inset-y-0 w-1/5 bg-gradient-to-l from-[#0d0d0d] to-transparent" aria-hidden="true" />
       </div>
     </div>
   </div>
