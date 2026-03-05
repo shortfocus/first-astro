@@ -17,6 +17,16 @@ export default defineConfig({
         "@": "/src",
       },
     },
+    optimizeDeps: {
+      include: [
+        "react",
+        "react-dom",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+      ],
+    },
   },
 
   adapter: cloudflare({

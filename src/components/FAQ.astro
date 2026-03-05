@@ -3,18 +3,20 @@ import { siteConfig } from "@/config/site.config";
 ---
 
 <section id="faq" class="border-t border-slate-800 bg-[#0d0d0d] py-20 md:py-28">
-  <div class="mx-auto max-w-3xl px-6">
-    <h2 class="text-2xl font-bold text-white md:text-3xl">
-      {siteConfig.faq.title}
-    </h2>
-    <p class="mt-3 text-slate-400">
-      {siteConfig.faq.subtitle}
-    </p>
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="rounded-2xl border border-slate-800 border-l-4 border-l-[#f43f5e] bg-slate-900/20 px-6 py-5">
+      <h2 class="text-2xl font-bold text-white md:text-3xl">
+        <span class="text-[#f43f5e]">05</span> FAQ
+      </h2>
+      <p class="mt-3 text-slate-400">
+        {siteConfig.faq.subtitle}
+      </p>
+    </div>
 
     <div class="mt-14 space-y-2">
       {
         siteConfig.faq.items.map((item, i) => (
-          <details class="group rounded-lg border border-slate-800 bg-slate-900/30">
+          <details class="group rounded-xl border border-slate-800 border-l-4 border-l-[#f43f5e]/50 bg-slate-900/30">
             <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-left text-white hover:bg-slate-800/30">
               <span>
                 <span class="mr-2 text-[#f43f5e]">Q.</span>

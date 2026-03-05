@@ -10,6 +10,11 @@ export const siteConfig = {
   },
   nav: {
     consult: "상담 신청",
+    items: [
+      { label: "솔리드웹", href: "/" },
+      { label: "포트폴리오", href: "#portfolio" },
+      { label: "문의하기", href: "#contact" },
+    ],
   },
   whatWeDo: {
     title: "01 What We Do",

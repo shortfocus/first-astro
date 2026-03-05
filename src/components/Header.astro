@@ -1,5 +1,19 @@
 ---
 import { siteConfig } from "@/config/site.config";
+
+const pathname = Astro.url.pathname;
+const navItems = siteConfig.nav.items ?? [
+  { label: siteConfig.name, href: "/" },
+  { label: "포트폴리오", href: "#portfolio" },
+  { label: siteConfig.nav.consult, href: "#contact" },
+  { label: "스타트업 트랙", href: "#startup-track" },
+];
+
+function isActive(href: string): boolean {
+  if (href === "/") return pathname === "/" || pathname === "";
+  if (href.startsWith("#")) return false;
+  return pathname === href || pathname === href + "/";
+}
 ---
 
 <header class="sticky top-0 z-50 border-b border-slate-800 bg-[#0D0D0D]">
@@ -8,23 +22,30 @@ import { siteConfig } from "@/config/site.config";
       {siteConfig.name}
     </a>
 
-    <nav class="hidden items-center gap-8 text-sm text-slate-300 md:flex">
-      <a
-        href="#contact"
-        class="rounded border border-slate-500 px-4 py-2 text-slate-200 hover:border-slate-400 hover:bg-slate-800/50 transition"
-      >
-        {siteConfig.nav.consult}
-      </a>
+    <!-- 언더라인 네비 -->
+    <nav class="nav-underline hidden md:flex md:items-center md:gap-8" aria-label="메인 메뉴">
+      {navItems.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              "nav-link border-b-2 pb-1 text-sm font-medium transition-colors",
+              active
+                ? "border-white text-white"
+                : "border-transparent text-slate-400 hover:border-white/40 hover:text-white",
+            ]}
+            data-href={item.href}
+            aria-current={active ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        );
+      })}
     </nav>
 
-    <!-- 모바일: 햄버거 + 상담 신청 -->
+    <!-- 모바일: 햄버거 -->
     <div class="flex items-center gap-3 md:hidden">
-      <a
-        href="#contact"
-        class="rounded border border-slate-500 px-3 py-1.5 text-sm text-slate-200"
-      >
-        {siteConfig.nav.consult}
-      </a>
       <button
         type="button"
         class="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded border border-slate-600 bg-transparent text-slate-400"
@@ -41,10 +62,24 @@ import { siteConfig } from "@/config/site.config";
   <!-- 모바일 메뉴 -->
   <div
     id="mobile-menu"
-    class="hidden border-t border-slate-800 bg-[#0d0d0d] px-6 py-4 md:hidden"
+    class="hidden border-t border-slate-800 bg-[#0D0D0D] px-6 py-4 md:hidden"
   >
-    <nav class="flex flex-col gap-4 text-sm">
-      <a href="#contact" class="text-slate-300 hover:text-white">{siteConfig.nav.consult}</a>
+    <nav class="flex flex-col gap-1 text-sm">
+      {navItems.map((item) => {
+        const active = isActive(item.href);
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              "nav-link border-l-2 py-2.5 pl-4 font-medium transition-colors",
+              active ? "border-white text-white" : "border-transparent text-slate-400 hover:border-white/50 hover:text-white",
+            ]}
+            data-href={item.href}
+          >
+            {item.label}
+          </a>
+        );
+      })}
     </nav>
   </div>
 </header>
@@ -55,4 +90,20 @@ import { siteConfig } from "@/config/site.config";
   if (toggle && menu) {
     toggle.addEventListener("click", () => menu.classList.toggle("hidden"));
   }
+
+  function setActiveByHash() {
+    const currentHash = window.location.hash || "";
+    document.querySelectorAll(".nav-link").forEach((el) => {
+      const link = el as HTMLAnchorElement;
+      const href = link.getAttribute("data-href") || "";
+      const isActive = currentHash === "" ? href === "/" : href === currentHash;
+      link.classList.toggle("border-white", isActive);
+      link.classList.toggle("border-transparent", !isActive);
+      link.classList.toggle("text-white", isActive);
+      link.classList.toggle("text-slate-400", !isActive);
+      link.setAttribute("aria-current", isActive ? "page" : "false");
+    });
+  }
+  setActiveByHash();
+  window.addEventListener("hashchange", setActiveByHash);
 </script>
