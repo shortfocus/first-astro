@@ -1,0 +1,152 @@
+---
+import { siteConfig } from "@/config/site.config";
+---
+
+<div
+  id="privacy-panel"
+  class="group fixed inset-0 z-[100] flex items-end justify-center opacity-0 pointer-events-none transition-opacity duration-300 data-[state=open]:opacity-100 data-[state=open]:pointer-events-auto"
+  data-state="closed"
+  aria-hidden="true"
+>
+  <!-- 배경 딤 -->
+  <button
+    type="button"
+    data-privacy-close
+    class="absolute inset-0 bg-black/60"
+    aria-label="닫기"
+  ></button>
+
+  <!-- 하단 슬라이드 패널 -->
+  <div
+    class="relative w-full max-h-[85vh] rounded-t-2xl border-t border-slate-700 bg-[#0d0d0d] shadow-2xl transform translate-y-full transition-transform duration-300 ease-out group-data-[state=open]:translate-y-0 overflow-hidden flex flex-col"
+  >
+    <!-- 헤더 + 닫기 -->
+    <div class="flex-shrink-0 flex items-center justify-between border-b border-slate-800 px-6 py-4">
+      <h2 class="text-lg font-bold text-white">개인정보처리방침</h2>
+      <button
+        type="button"
+        data-privacy-close
+        class="rounded-lg p-2 text-slate-400 hover:bg-slate-800 hover:text-white transition"
+        aria-label="닫기"
+      >
+        <span class="text-xl leading-none">×</span>
+      </button>
+    </div>
+
+    <!-- 스크롤 영역 -->
+    <div class="flex-1 overflow-y-auto px-6 py-6">
+      <p class="text-sm text-slate-500">시행일: 2025년 1월 1일</p>
+
+      <div class="mt-8 space-y-8 text-slate-300">
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제1조 (개인정보의 수집 및 이용 목적)</h3>
+          <p class="text-sm leading-relaxed">
+            {siteConfig.name}(이하 “회사”)는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.
+          </p>
+          <ul class="mt-2 list-inside list-disc space-y-1 text-sm leading-relaxed">
+            <li>서비스 제공: 상담 신청, 문의 응답, 서비스 제공에 따른 본인 식별·인증</li>
+            <li>마케팅 및 광고: 서비스 안내, 이벤트 정보 제공(동의 시)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제2조 (수집하는 개인정보의 항목)</h3>
+          <p class="text-sm leading-relaxed">회사는 서비스 제공을 위해 아래와 같은 개인정보를 수집할 수 있습니다.</p>
+          <ul class="mt-2 list-inside list-disc space-y-1 text-sm leading-relaxed">
+            <li>필수항목: 이름, 이메일 주소, 연락처(문의 시)</li>
+            <li>선택항목: 회사명, 문의 내용 등</li>
+            <li>자동 수집: 접속 로그, 쿠키, 접속 IP 정보(서비스 이용 과정에서 자동 생성)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제3조 (개인정보의 보유 및 이용 기간)</h3>
+          <p class="text-sm leading-relaxed">
+            회사는 법령에 따른 개인정보 보유·이용기간 또는 정보주체로부터 개인정보를 수집 시에 동의받은 기간 내에서 개인정보를 처리·보유합니다. 상담·문의 등으로 수집된 개인정보는 목적 달성 후 지체 없이 파기하며, 관계 법령에 따라 보존할 필요가 있는 경우 해당 기간 동안 보관 후 파기합니다.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제4조 (개인정보의 제3자 제공)</h3>
+          <p class="text-sm leading-relaxed">
+            회사는 정보주체의 개인정보를 제1조에서 명시한 수집·이용 목적 범위 내에서만 처리하며, 원칙적으로 제3자에게 제공하지 않습니다. 다만, 법령에 따라 요구되는 경우 등에는 해당 법령에 따라 제공할 수 있습니다.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제5조 (정보주체의 권리)</h3>
+          <p class="text-sm leading-relaxed">
+            정보주체는 개인정보주체로서 다음과 같은 권리를 행사할 수 있습니다. 권리 행사는 회사에 대해 서면, 전화, 이메일 등을 통해 요구할 수 있으며, 회사는 이에 대해 지체 없이 조치하겠습니다.
+          </p>
+          <ul class="mt-2 list-inside list-disc space-y-1 text-sm leading-relaxed">
+            <li>개인정보 열람 요구</li>
+            <li>오류 등이 있을 경우 정정·삭제 요구</li>
+            <li>개인정보 처리 정지 요구</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제6조 (개인정보의 안전성 확보 조치)</h3>
+          <p class="text-sm leading-relaxed">
+            회사는 개인정보의 안전성 확보를 위해 기술적·관리적 조치를 하고 있으며, 개인정보가 분실·도난·유출·위조·변조되지 않도록 필요한 보안 조치를 이행하고 있습니다.
+          </p>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제7조 (개인정보 보호책임자)</h3>
+          <p class="text-sm leading-relaxed">
+            회사는 개인정보 처리에 관한 업무를 총괄하여 책임지고, 개인정보 처리와 관련한 정보주체의 불만 처리 및 피해 구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.
+          </p>
+          <div class="mt-3 rounded-lg border border-slate-700 bg-slate-800/50 p-4 text-sm">
+            <p><span class="text-slate-400">담당자:</span> {siteConfig.footer.representative}</p>
+            <p class="mt-1"><span class="text-slate-400">이메일:</span> <a href={`mailto:${siteConfig.contact.email}`} class="text-white underline hover:no-underline">{siteConfig.contact.email}</a></p>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="mb-2 text-base font-semibold text-white">제8조 (개인정보 처리방침의 변경)</h3>
+          <p class="text-sm leading-relaxed">
+            이 개인정보처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경 내용의 추가·삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const panel = document.getElementById("privacy-panel");
+    const openTrigger = document.getElementById("open-privacy");
+    const closeButtons = document.querySelectorAll("[data-privacy-close]");
+
+    if (!panel || !openTrigger) return;
+
+    const panelEl = panel;
+
+    function open() {
+      panelEl.setAttribute("data-state", "open");
+      panelEl.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      panelEl.setAttribute("data-state", "closed");
+      panelEl.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    openTrigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      open();
+    });
+
+    closeButtons.forEach((btn) => {
+      btn.addEventListener("click", close);
+    });
+
+    panelEl.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+  })();
+</script>

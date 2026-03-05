@@ -18,13 +18,9 @@ import { siteConfig } from "@/config/site.config";
 
     <!-- 연락처 + SNS 아이콘 -->
     <div class="mt-14 rounded-2xl border border-slate-800 border-t-[#f43f5e]/50 bg-slate-900/20 p-8 flex flex-wrap items-center gap-8 text-slate-400">
-      <a href={`tel:${siteConfig.contact.phone.replace(/-/g, "")}`} class="flex items-center gap-2 hover:text-white transition">
-        <span aria-hidden="true">📞</span>
-        {siteConfig.contact.phone}
-      </a>
       <a href={`mailto:${siteConfig.contact.email}`} class="flex items-center gap-2 hover:text-white transition">
         <span aria-hidden="true">✉️</span>
-        {siteConfig.contact.email}
+        이메일: {siteConfig.contact.email}
       </a>
       <a
         href={siteConfig.kakaoChatUrl}

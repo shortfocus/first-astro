@@ -8,13 +8,14 @@ const year = new Date().getFullYear();
     <div class="grid gap-10 md:grid-cols-3">
       <div>
         <h3 class="font-logo text-xl font-bold text-white">{siteConfig.name}</h3>
-        <p class="mt-3 text-sm text-slate-400">{siteConfig.footer.address}</p>
-        <p class="mt-1 text-sm text-slate-400">{siteConfig.contact.phone}</p>
-        <p class="mt-1 text-sm text-slate-400">{siteConfig.contact.email}</p>
+        <p class="mt-3 text-sm text-slate-400 leading-relaxed">{siteConfig.footer.address}</p>
+        <p class="mt-2 text-xs text-slate-500">대표: {siteConfig.footer.representative}</p>
+        <p class="mt-1 text-xs text-slate-500">
+          이메일: <a href={`mailto:${siteConfig.contact.email}`} class="hover:text-slate-300">{siteConfig.contact.email}</a>
+        </p>
         <p class="mt-2 text-xs text-slate-500">{siteConfig.footer.businessNumber}</p>
-        <div class="mt-4 flex gap-4 text-sm">
-          <a href="#" class="text-slate-500 hover:text-slate-300">{siteConfig.footer.terms}</a>
-          <a href="#" class="text-slate-500 hover:text-slate-300">{siteConfig.footer.privacy}</a>
+        <div class="mt-4 text-sm">
+          <a href="#" id="open-privacy" class="text-slate-500 hover:text-slate-300">{siteConfig.footer.privacy}</a>
         </div>
       </div>
       <div>

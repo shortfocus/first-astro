@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import PrivacyPanel from "@/components/PrivacyPanel.astro";
 import { siteConfig } from "@/config/site.config";
 ---
 
@@ -23,10 +24,11 @@ import { siteConfig } from "@/config/site.config";
   </head>
   <body class="flex min-h-screen flex-col bg-background text-foreground">
     <Header />
-    <main class="flex-1">
+    <main class="flex flex-1 flex-col">
       <slot />
     </main>
     <Footer />
+    <PrivacyPanel />
     <!-- 카카오톡 플로팅: 클릭 시 카카오 페이지로 바로 이동 -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
       <a
