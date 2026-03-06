@@ -2,9 +2,7 @@
 import { siteConfig } from "@/config/site.config";
 
 const portfolio = siteConfig.portfolioPage;
-const years = portfolio.filterYears;
 const projects = portfolio.projects;
-const defaultYear = years[0] ?? 2026;
 ---
 
 <section id="portfolio" class="min-h-screen border-t border-slate-800 bg-[#0d0d0d] py-16 md:py-24">
@@ -17,29 +15,13 @@ const defaultYear = years[0] ?? 2026;
       <p class="mt-4 max-w-2xl text-slate-300 leading-relaxed">
         {portfolio.description}
       </p>
-      <!-- 연도 필터 -->
-      <div class="mt-8 flex flex-wrap gap-6 border-b border-slate-700/80 pb-6" role="tablist" aria-label="연도별 필터">
-        {years.map((y) => (
-          <button
-            type="button"
-            class="portfolio-year-tab text-lg font-medium transition-colors data-[active=true]:border-b-2 data-[active=true]:border-white data-[active=true]:text-white data-[active=false]:text-slate-500 data-[active=false]:hover:text-slate-300"
-            data-year={y}
-            data-active={y === defaultYear}
-            role="tab"
-            aria-selected={y === defaultYear}
-          >
-            {y}
-          </button>
-        ))}
-      </div>
     </div>
 
     <!-- 프로젝트 그리드 -->
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
       {projects.map((p) => (
         <article
-          class="portfolio-card flex flex-col rounded-2xl border border-slate-700/80 bg-slate-900/40 overflow-hidden transition hover:border-slate-600"
-          data-year={p.year}
+          class="flex flex-col rounded-2xl border border-slate-700/80 bg-slate-900/40 overflow-hidden transition hover:border-slate-600"
         >
           <!-- 이미지 영역 (플레이스홀더 또는 이미지) -->
           <div class="aspect-[4/3] w-full shrink-0 bg-slate-800">
@@ -70,31 +52,3 @@ const defaultYear = years[0] ?? 2026;
     </div>
   </div>
 </section>
-
-<script is:inline>
-  (function () {
-    var tabs = document.querySelectorAll(".portfolio-year-tab");
-    var cards = document.querySelectorAll(".portfolio-card");
-    if (!tabs.length || !cards.length) return;
-
-    function setActiveYear(year) {
-      tabs.forEach(function (tab) {
-        var y = Number(tab.getAttribute("data-year"));
-        tab.setAttribute("data-active", y === year ? "true" : "false");
-        tab.setAttribute("aria-selected", y === year ? "true" : "false");
-      });
-      cards.forEach(function (card) {
-        var cardYear = Number(card.getAttribute("data-year"));
-        card.style.display = cardYear === year ? "" : "none";
-      });
-    }
-
-    setActiveYear(Number(tabs[0].getAttribute("data-year")));
-
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        setActiveYear(Number(tab.getAttribute("data-year")));
-      });
-    });
-  })();
-</script>

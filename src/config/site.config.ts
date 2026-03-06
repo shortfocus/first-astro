@@ -67,8 +67,14 @@ export const siteConfig = {
     ],
   },
   projects: {
-    title: "03 Our Projects",
+    title: "Our Projects",
+    sectionLabel: "#03",
+    descriptionLines: [
+      "우리가 함께 만든 프로젝트들은",
+      "사용성과 기술, 그리고 디자인의 조화를 추구합니다.",
+    ],
     subtitle: "우리의 성공적인 프로젝트들을 만나보세요.",
+    viewMoreLabel: "프로젝트 더보기",
     featured: {
       title: "ISAC Food",
       description: "ISAC Food는 (주)이삭푸드의 새로운 브랜드 아이덴티티 구축 및 웹사이트 개발 프로젝트입니다.",
