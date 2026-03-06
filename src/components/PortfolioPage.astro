@@ -24,10 +24,10 @@ const projects = portfolio.projects;
           data-portfolio-index={i}
           class="portfolio-item flex flex-col rounded-2xl border border-slate-700/80 bg-slate-900/40 overflow-hidden transition hover:border-slate-600 {i >= 6 ? 'portfolio-item--hidden' : ''}"
         >
-          <!-- 이미지 영역 (플레이스홀더 또는 이미지) -->
-          <div class="aspect-[4/3] w-full shrink-0 bg-slate-800">
+          <!-- 이미지 영역 (플레이스홀더 또는 이미지) - 높이 통일 -->
+          <div class="h-48 w-full shrink-0 overflow-hidden bg-slate-800 sm:h-52 lg:h-56">
             {p.image ? (
-              <img src={p.image} alt="" class="h-full w-full object-cover" />
+              <img src={p.image} alt="" class="h-full w-full object-cover object-center" />
             ) : (
               <div class="flex h-full w-full items-center justify-center bg-gradient-to-br from-slate-700 to-slate-800 text-slate-500">
                 <span class="text-sm">{p.title}</span>

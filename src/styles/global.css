@@ -61,3 +61,55 @@
     --chart-5: 340 75% 55%
   }
 }
+
+/* 라이트 모드: 다크 톤 유틸 오버라이드 */
+html:not(.dark) .theme-header,
+html:not(.dark) [class*="0D0D0D"],
+html:not(.dark) [class*="0d0d0d"] {
+  background-color: #fff !important;
+  border-color: #e2e8f0;
+}
+html:not(.dark) .theme-logo,
+html:not(.dark) .text-white {
+  color: #0f172a !important;
+}
+html:not(.dark) .text-slate-300 {
+  color: #475569 !important;
+}
+html:not(.dark) .text-slate-400 {
+  color: #64748b !important;
+}
+html:not(.dark) .text-slate-500,
+html:not(.dark) .text-slate-200 {
+  color: #64748b !important;
+}
+html:not(.dark) a:hover.text-slate-500,
+html:not(.dark) .hover\:text-slate-300:hover {
+  color: #0f172a !important;
+}
+html:not(.dark) .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+html:not(.dark) .border-slate-800 {
+  border-color: #e2e8f0 !important;
+}
+html:not(.dark) .border-slate-700 {
+  border-color: #cbd5e1 !important;
+}
+html:not(.dark) [class*="bg-slate-800"] {
+  background-color: #e2e8f0 !important;
+}
+html:not(.dark) [class*="bg-slate-900"] {
+  background-color: #f1f5f9 !important;
+}
+html:not(.dark) section {
+  background-color: #f8fafc !important;
+}
+html:not(.dark) .theme-toggle {
+  border-color: #cbd5e1;
+  color: #475569;
+}
+html:not(.dark) .theme-toggle:hover {
+  border-color: #94a3b8;
+  color: #0f172a;
+}
