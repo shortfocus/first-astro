@@ -2,11 +2,12 @@
 import { defineConfig } from "astro/config";
 
 import cloudflare from "@astrojs/cloudflare";
-
 import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://solidweb.kr", // 실제 배포 도메인으로 변경하세요.
   devToolbar: {
     enabled: false,
   },
@@ -43,5 +44,5 @@ export default defineConfig({
     imageService: "cloudflare",
   }),
 
-  integrations: [react()],
+  integrations: [react(), sitemap()],
 });

@@ -1,0 +1,6 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Sitemap (배포 도메인에 맞게 astro.config.mjs의 site와 일치해야 합니다.)
+Sitemap: https://solidweb.kr/sitemap-index.xml

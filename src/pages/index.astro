@@ -6,9 +6,21 @@ import OurStrength from "@/components/OurStrength.astro";
 import OurProjects from "@/components/OurProjects.astro";
 import Review from "@/components/Review.astro";
 import FAQ from "@/components/FAQ.astro";
+import { siteConfig } from "@/config/site.config";
 ---
 
 <BaseLayout>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: siteConfig.faq.items.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    })} />
+  </Fragment>
   <Hero />
   <WhatWeDo />
   <OurStrength />
