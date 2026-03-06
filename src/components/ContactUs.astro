@@ -4,192 +4,504 @@ import { siteConfig } from "@/config/site.config";
 const c = siteConfig.contactPage;
 const ph = c.placeholders;
 const lb = c.labels;
+const v = "validation" in c && typeof (c as { validation?: Record<string, string> }).validation === "object" ? (c as { validation: Record<string, string> }).validation : {} as Record<string, string>;
 ---
 
-<section id="contact" class="min-h-screen border-t border-slate-800 bg-[#0d0d0d] py-16 md:py-24">
-  <div class="mx-auto max-w-3xl px-6">
+<section id="contact" class="relative min-h-screen overflow-hidden bg-[#0d0d0d] py-20 md:py-28">
+  <!-- 배경 톤 -->
+  <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-slate-900/30 via-transparent to-transparent" aria-hidden="true"></div>
+
+  <div class="relative w-full max-w-none px-4 sm:px-6">
     <!-- 히어로 -->
     <div class="text-center">
-      <h1 class="text-3xl font-bold text-white md:text-4xl">
+      <span class="inline-flex rounded-lg bg-[#f43f5e]/10 px-3 py-1 text-xs font-medium tracking-wide text-[#f43f5e]">
+        문의
+      </span>
+      <h1 class="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
         {c.heroTitle}
       </h1>
-      <p class="mt-3 text-lg text-white/90">
+      <p class="mt-3 text-lg text-slate-300">
         {c.heroSubtitle}
       </p>
-      <p class="mt-2 text-sm text-slate-400">
+      <p class="mt-2 flex items-center justify-center gap-2 text-sm text-slate-500">
+        <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true"></span>
         {c.heroDesc}
       </p>
     </div>
 
     <!-- 문의 폼 -->
     <form
-      class="mt-14 rounded-2xl border border-slate-700/80 bg-slate-900/40 p-6 md:p-8"
+      id="contact_form"
+      class="mt-12 w-full max-w-none rounded-2xl bg-slate-900/30 shadow-xl shadow-black/20 backdrop-blur-sm md:mt-16"
       action="#"
       method="post"
       aria-label="문의하기"
+      data-validation={JSON.stringify(v)}
     >
-      <!-- 1. 방문 경로 -->
-      <fieldset class="border-b border-slate-700/80 pb-6">
-        <legend class="mb-4 text-sm font-semibold text-slate-200">
-          {c.sections.visitPath}
-        </legend>
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {["검색", "지인", "기타", "온라인", "SNS", "광고"].map((value) => (
-            <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-sm text-slate-300 transition hover:border-slate-500">
-              <input type="radio" name="visit_path" value={value} class="h-4 w-4 border-slate-500 bg-slate-800 text-[#f43f5e] focus:ring-[#f43f5e]" />
-              <span>{value}</span>
-            </label>
-          ))}
+      <div class="rounded-2xl p-6 md:p-10">
+        <!-- 1. 방문 경로: 좌측 제목 / 우측 항목 -->
+        <div class="flex flex-col gap-4 w-full pb-8 md:flex-row md:flex-nowrap md:items-stretch md:gap-10" role="group" aria-labelledby="visit-path-heading">
+          <div class="min-w-0 md:flex-[3_1_0%] md:flex">
+            <h3 id="visit-path-heading" class="break-keep whitespace-pre-line text-2xl font-semibold tracking-tight text-white">
+              {c.sections.visitPath}
+            </h3>
+          </div>
+          <div class="min-w-0 md:flex-[7_1_0%]">
+            <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {[
+              { value: "검색", icon: "search" },
+              { value: "중개 플랫폼", icon: "users" },
+              { value: "지인", icon: "user" },
+              { value: "광고", icon: "megaphone" },
+              { value: "SNS", icon: "share" },
+              { value: "기타", icon: "dots" },
+            ].map(({ value, icon }) => (
+              <label class="contact-radio flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-transparent bg-slate-800/40 px-3 py-3.5 text-xs text-slate-300 transition-all has-[:checked]:border-[#f43f5e]/50 has-[:checked]:bg-[#f43f5e]/20">
+                {icon === "search" && (
+                    <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607z" /></svg>
+                  )}
+                  {icon === "users" && (
+                    <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>
+                  )}
+                  {icon === "user" && (
+                    <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                  )}
+                  {icon === "megaphone" && (
+                    <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783A17.917 17.917 0 0 1 12 21.75c-2.17 0-4.207-.576-5.963-1.584A17.04 17.04 0 0 1 7.655 18m12.027-9.75a18.9 18.9 0 0 1-.985 2.783 17.917 17.917 0 0 1-5.963 1.584m0-9.18c.253.962.584 1.892.985 2.783A17.917 17.917 0 0 1 12 3.75c2.17 0 4.207.576 5.963 1.584a18.9 18.9 0 0 1 .985 2.783" /></svg>
+                  )}
+                  {icon === "dots" && (
+                    <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
+                  )}
+                  {icon === "share" && (
+                    <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" /></svg>
+                  )}
+                <span class="font-medium">{value}</span>
+                <input type="radio" name="visit_path" value={value} class="sr-only" required={value === "검색"} />
+              </label>
+            ))}
+            </div>
+            <p id="error_visit_path" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+          </div>
         </div>
-      </fieldset>
 
-      <!-- 2. 프로젝트 정보 -->
-      <fieldset class="border-b border-slate-700/80 py-6">
-        <legend class="mb-4 text-sm font-semibold text-slate-200">
-          {c.sections.projectInfo}
-        </legend>
-        <div class="space-y-4">
-          <div>
-            <label for="project_name" class="sr-only">프로젝트 이름</label>
-            <input
-              type="text"
-              id="project_name"
-              name="project_name"
-              placeholder={ph.projectName}
-              class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
-            />
+        <!-- 2. 프로젝트 정보: 좌측 제목 / 우측 콘텐츠 -->
+        <div class="flex flex-col gap-4 w-full py-8 md:flex-row md:flex-nowrap md:items-stretch md:gap-10" role="group" aria-labelledby="project-info-heading">
+          <div class="min-w-0 md:flex-[3_1_0%] md:flex">
+            <h3 id="project-info-heading" class="break-keep whitespace-pre-line text-2xl font-semibold tracking-tight text-white">
+              {c.sections.projectInfo}
+            </h3>
           </div>
-          <div>
-            <span class="mb-2 block text-xs text-slate-500">프로젝트 유형</span>
-            <div class="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {["앱", "솔루션", "AI", "기타"].map((value) => (
-                <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-600/80 bg-slate-800/50 px-3 py-2 text-xs text-slate-300">
-                  <input type="radio" name="project_type_1" value={value} class="h-3 w-3 border-slate-500 bg-slate-800 text-[#f43f5e] focus:ring-[#f43f5e]" />
-                  {value}
-                </label>
-              ))}
-            </div>
-            <div class="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {["웹", "데스크톱 어플리케이션", "데이터베이스", "기타"].map((value) => (
-                <label class="flex cursor-pointer items-center gap-2 rounded-lg border border-slate-600/80 bg-slate-800/50 px-3 py-2 text-xs text-slate-300">
-                  <input type="radio" name="project_type_2" value={value} class="h-3 w-3 border-slate-500 bg-slate-800 text-[#f43f5e] focus:ring-[#f43f5e]" />
-                  {value}
-                </label>
-              ))}
-            </div>
-          </div>
-          <div>
-            <label for="project_detail" class="sr-only">프로젝트 상세</label>
-            <textarea
-              id="project_detail"
-              name="project_detail"
-              rows={5}
-              placeholder={ph.projectDetail}
-              class="w-full resize-y rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
-            />
-          </div>
-          <div class="grid gap-4 sm:grid-cols-2">
+          <div class="min-w-0 md:flex-[7_1_0%] space-y-5">
             <div>
-              <label for="budget" class="mb-1 block text-xs text-slate-500">{lb.budget}</label>
+              <label for="project_name" class="sr-only">프로젝트 이름</label>
               <input
                 type="text"
-                id="budget"
-                name="budget"
-                placeholder={ph.budget}
-                class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
+                id="project_name"
+                name="project_name"
+                placeholder={ph.projectName}
+                required
+                class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-red-500/50"
               />
+              <p id="error_project_name" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
             </div>
             <div>
-              <label for="due_date" class="mb-1 block text-xs text-slate-500">{lb.dueDate}</label>
-              <input
-                type="date"
-                id="due_date"
-                name="due_date"
-                class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
+              <span class="mb-2 block text-xs font-medium text-slate-500">프로젝트 유형</span>
+              <div class="grid grid-cols-2 gap-2">
+                {[
+                  { value: "웹", icon: "web" },
+                  { value: "앱", icon: "app" },
+                  { value: "플랫폼", icon: "platform" },
+                  { value: "기타", icon: "etc" },
+                ].map(({ value, icon }) => (
+                  <label class="contact-radio flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-transparent bg-slate-800/40 px-3 py-3.5 text-xs text-slate-300 transition-all has-[:checked]:border-[#f43f5e]/50 has-[:checked]:bg-[#f43f5e]/20">
+                    {icon === "web" && (
+                      <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                    )}
+                    {icon === "app" && (
+                      <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5h3m-6.75 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-15a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 4.5v15a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>
+                    )}
+                    {icon === "platform" && (
+                      <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" /></svg>
+                    )}
+                    {icon === "etc" && (
+                      <svg class="h-5 w-5 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
+                    )}
+                    <span class="font-medium">{value}</span>
+                    <input type="radio" name="project_type" value={value} class="sr-only" required={value === "웹"} />
+                  </label>
+                ))}
+              </div>
+              <p id="error_project_type" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+            </div>
+            <div>
+              <label for="project_detail" class="sr-only">프로젝트 상세</label>
+              <textarea
+                id="project_detail"
+                name="project_detail"
+                rows={5}
+                placeholder={ph.projectDetail}
+                required
+                class="contact-input w-full resize-y rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-red-500/50"
               />
+              <p id="error_project_detail" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="budget" class="mb-1.5 block text-xs font-medium text-slate-500">{lb.budget}</label>
+                <input
+                  type="text"
+                  id="budget"
+                  name="budget"
+                  placeholder={ph.budget}
+                  required
+                  inputmode="numeric"
+                  autocomplete="off"
+                  class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-red-500/50"
+                />
+                <p id="error_budget" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+              </div>
+              <div>
+                <label for="due_date" class="mb-1.5 block text-xs font-medium text-slate-500">{lb.dueDate}</label>
+                <div class="due-date-dropdown relative">
+                  <button
+                    type="button"
+                    id="due_date_trigger"
+                    class="contact-input flex w-full items-center justify-between gap-2 rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-left text-white focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-2 data-[invalid]:ring-red-500/50"
+                    aria-haspopup="dialog"
+                    aria-expanded="false"
+                    aria-label={lb.dueDate}
+                  >
+                    <span id="due_date_display" class="truncate">{ph.dateSelect}</span>
+                    <svg class="h-4 w-4 shrink-0 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <input
+                    type="date"
+                    id="due_date"
+                    name="due_date"
+                    required
+                    class="absolute inset-0 cursor-pointer opacity-0 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full"
+                    aria-hidden="true"
+                    tabindex="-1"
+                  />
+                </div>
+                <p id="error_due_date" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+              </div>
             </div>
           </div>
         </div>
-      </fieldset>
 
-      <!-- 3. 인적사항 -->
-      <fieldset class="py-6">
-        <legend class="mb-4 text-sm font-semibold text-slate-200">
-          {c.sections.contactInfo}
-        </legend>
-        <div class="space-y-4">
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label for="name" class="sr-only">{lb.name}</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder={ph.name}
-                class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
-              />
+        <!-- 3. 인적사항: 좌측 제목 / 우측 콘텐츠 -->
+        <div class="flex flex-col gap-4 w-full pt-8 md:flex-row md:flex-nowrap md:items-stretch md:gap-10" role="group" aria-labelledby="contact-info-heading">
+          <div class="min-w-0 md:flex-[3_1_0%] md:flex">
+            <h3 id="contact-info-heading" class="break-keep whitespace-pre-line text-2xl font-semibold tracking-tight text-white">
+              {c.sections.contactInfo}
+            </h3>
+          </div>
+          <div class="min-w-0 md:flex-[7_1_0%] space-y-5">
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="name" class="sr-only">{lb.name}</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder={ph.name}
+                  required
+                  class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-red-500/50"
+                />
+                <p id="error_name" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+              </div>
+              <div>
+                <label for="company" class="sr-only">{lb.company}</label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  placeholder={ph.company}
+                  class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20"
+                />
+              </div>
+            </div>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label for="phone" class="sr-only">{lb.phone}</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder={ph.phone}
+                  required
+                  class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-red-500/50"
+                />
+                <p id="error_phone" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+              </div>
+              <div>
+                <label for="position" class="sr-only">{lb.position}</label>
+                <input
+                  type="text"
+                  id="position"
+                  name="position"
+                  placeholder={ph.position}
+                  class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20"
+                />
+              </div>
             </div>
             <div>
-              <label for="company" class="sr-only">{lb.company}</label>
+              <label for="email" class="sr-only">{lb.email}</label>
               <input
-                type="text"
-                id="company"
-                name="company"
-                placeholder={ph.company}
-                class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
+                type="email"
+                id="email"
+                name="email"
+                placeholder={ph.email}
+                required
+                class="contact-input w-full rounded-xl border-0 bg-slate-800/40 px-4 py-3.5 text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-[#f43f5e]/20 data-[invalid]:ring-red-500/50"
               />
+              <p id="error_email" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
             </div>
-          </div>
-          <div class="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label for="phone" class="sr-only">{lb.phone}</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder={ph.phone}
-                class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
-              />
+            <div class="flex flex-wrap items-center gap-3 rounded-xl bg-slate-800/30 px-4 py-3">
+              <label class="flex cursor-pointer items-center gap-2.5 text-sm text-slate-400">
+                <input type="checkbox" name="privacy_consent" required class="h-4 w-4 rounded border-0 bg-slate-800 text-[#f43f5e] focus:ring-2 focus:ring-[#f43f5e] focus:ring-offset-2 focus:ring-offset-slate-900" />
+                <span>{lb.privacyConsent}</span>
+              </label>
+              <a href="#" class="privacy-open-trigger text-sm text-[#f43f5e] hover:underline">{lb.privacyView}</a>
             </div>
-            <div>
-              <label for="position" class="sr-only">{lb.position}</label>
-              <input
-                type="text"
-                id="position"
-                name="position"
-                placeholder={ph.position}
-                class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
-              />
+            <p id="error_privacy" class="mt-1.5 min-h-[1.25rem] text-sm text-red-400" role="alert" aria-live="polite"></p>
+            <div class="pt-2">
+              <button
+                type="submit"
+                id="contact_submit"
+                disabled
+                class="w-full rounded-xl bg-[#f43f5e] px-6 py-4 text-base font-semibold text-white shadow-lg shadow-[#f43f5e]/20 transition hover:bg-[#e11d48] focus:outline-none focus:ring-2 focus:ring-[#f43f5e] focus:ring-offset-2 focus:ring-offset-[#0d0d0d] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[#f43f5e]"
+              >
+                {c.submitLabel}
+              </button>
             </div>
-          </div>
-          <div>
-            <label for="email" class="sr-only">{lb.email}</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder={ph.email}
-              required
-              class="w-full rounded-lg border border-slate-600/80 bg-slate-800/50 px-4 py-3 text-white placeholder:text-slate-500 focus:border-[#f43f5e] focus:outline-none focus:ring-1 focus:ring-[#f43f5e]"
-            />
-          </div>
-          <div class="flex flex-wrap items-center gap-2">
-            <label class="flex cursor-pointer items-center gap-2 text-sm text-slate-400">
-              <input type="checkbox" name="privacy_consent" required class="h-4 w-4 rounded border-slate-500 bg-slate-800 text-[#f43f5e] focus:ring-[#f43f5e]" />
-              <span>{lb.privacyConsent}</span>
-            </label>
-            <a href="#" class="privacy-open-trigger text-sm text-[#f43f5e] hover:underline">{lb.privacyView}</a>
-          </div>
-          <div class="pt-4">
-            <button
-              type="submit"
-              class="w-full rounded-lg bg-slate-700 px-6 py-4 text-base font-semibold text-white transition hover:bg-[#f43f5e] focus:outline-none focus:ring-2 focus:ring-[#f43f5e] focus:ring-offset-2 focus:ring-offset-[#0d0d0d]"
-            >
-              {c.submitLabel}
-            </button>
           </div>
         </div>
-      </fieldset>
+      </div>
     </form>
   </div>
 </section>
+
+<script>
+  (function () {
+    const input = document.getElementById("due_date") as HTMLInputElement | null;
+    const display = document.getElementById("due_date_display");
+    const placeholder = display?.textContent ?? "날짜 선택";
+    if (!input || !display) return;
+    function formatDisplay(value: string): string {
+      if (!value) return placeholder;
+      const parts = value.split("-");
+      if (parts.length < 3) return value;
+      return parts[0] + "년 " + Number(parts[1]) + "월 " + Number(parts[2]) + "일";
+    }
+    input.addEventListener("change", function () {
+      display.textContent = formatDisplay(this.value);
+    });
+    if (input.value) display.textContent = formatDisplay(input.value);
+  })();
+
+  (function () {
+    const form = document.getElementById("contact_form");
+    const submitBtn = document.getElementById("contact_submit") as HTMLButtonElement | null;
+    if (!form || !submitBtn) return;
+
+    const formEl = form;
+    const btn = submitBtn;
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function validPhone(s: string): boolean {
+      const digits = s.replace(/\D/g, "");
+      return digits.length >= 10 && digits.length <= 11;
+    }
+    function isFormValid(): boolean {
+      const visitPath = formEl.querySelector<HTMLInputElement>('input[name="visit_path"]:checked');
+      const projectName = formEl.querySelector<HTMLInputElement>("#project_name");
+      const projectType = formEl.querySelector<HTMLInputElement>('input[name="project_type"]:checked');
+      const projectDetail = formEl.querySelector<HTMLInputElement>("#project_detail");
+      const budget = formEl.querySelector<HTMLInputElement>("#budget");
+      const dueDate = formEl.querySelector<HTMLInputElement>("#due_date");
+      const name = formEl.querySelector<HTMLInputElement>("#name");
+      const phone = formEl.querySelector<HTMLInputElement>("#phone");
+      const email = formEl.querySelector<HTMLInputElement>("#email");
+      const privacy = formEl.querySelector<HTMLInputElement>('input[name="privacy_consent"]');
+
+      const phoneVal = phone?.value.trim() ?? "";
+      const emailVal = email?.value.trim() ?? "";
+      const budgetVal = budget?.value.trim() ?? "";
+      return !!(
+        visitPath &&
+        projectName?.value.trim() &&
+        projectType &&
+        projectDetail?.value.trim() &&
+        budgetVal &&
+        /^\d+$/.test(budgetVal) &&
+        dueDate?.value &&
+        name?.value.trim() &&
+        phoneVal &&
+        validPhone(phoneVal) &&
+        emailVal &&
+        emailRegex.test(emailVal) &&
+        privacy?.checked
+      );
+    }
+
+    function updateSubmitButton() {
+      btn.disabled = !isFormValid();
+    }
+
+    formEl.addEventListener("input", updateSubmitButton);
+    formEl.addEventListener("change", updateSubmitButton);
+    updateSubmitButton();
+  })();
+
+  (function () {
+    const form = document.getElementById("contact_form");
+    if (!form) return;
+    const formEl = form as HTMLFormElement;
+    let messages: Record<string, string> = {};
+    try {
+      messages = JSON.parse(formEl.dataset.validation || "{}");
+    } catch {
+      /* ignore */
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    function validPhone(s: string): boolean {
+      const digits = s.replace(/\D/g, "");
+      return digits.length >= 10 && digits.length <= 11;
+    }
+
+    function setError(fieldId: string, message: string) {
+      const el = document.getElementById("error_" + fieldId);
+      if (el) el.textContent = message;
+      if (fieldId !== "visit_path" && fieldId !== "project_type") {
+        const input = formEl.querySelector<HTMLInputElement | HTMLTextAreaElement>("#" + fieldId) ?? formEl.querySelector<HTMLInputElement>("[name=\"" + fieldId + "\"]");
+        if (input) input.setAttribute("data-invalid", message ? "true" : "");
+      }
+      if (fieldId === "due_date") {
+        const trigger = document.getElementById("due_date_trigger");
+        if (trigger) trigger.setAttribute("data-invalid", message ? "true" : "");
+      }
+    }
+
+    function validateVisitPath(): string {
+      const checked = formEl.querySelector<HTMLInputElement>('input[name="visit_path"]:checked');
+      return checked ? "" : (messages.visitPath || "방문 경로를 선택해주세요.");
+    }
+    function validateProjectName(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#project_name");
+      const v = el?.value.trim();
+      return v ? "" : (messages.projectName || "프로젝트 이름을 입력해주세요.");
+    }
+    function validateProjectType(): string {
+      const checked = formEl.querySelector<HTMLInputElement>('input[name="project_type"]:checked');
+      return checked ? "" : (messages.projectType || "프로젝트 유형을 선택해주세요.");
+    }
+    function validateProjectDetail(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#project_detail");
+      const v = el?.value.trim();
+      return v ? "" : (messages.projectDetail || "프로젝트 상세를 입력해주세요.");
+    }
+    function validateBudget(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#budget");
+      const v = el?.value.trim() ?? "";
+      if (!v) return messages.budget || "예산을 입력해주세요.";
+      if (!/^\d+$/.test(v)) return messages.budgetFormat || "숫자만 입력해주세요.";
+      return "";
+    }
+    function validateDueDate(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#due_date");
+      const v = el?.value;
+      return v ? "" : (messages.dueDate || "마감일을 선택해주세요.");
+    }
+    function validateName(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#name");
+      const v = el?.value.trim();
+      return v ? "" : (messages.name || "성명을 입력해주세요.");
+    }
+    function formatPhoneWithHyphen(digits: string): string {
+      const d = digits.replace(/\D/g, "");
+      if (d.length <= 3) return d;
+      if (d.startsWith("010")) {
+        if (d.length <= 6) return d.slice(0, 3) + "-" + d.slice(3);
+        if (d.length <= 10) return d.slice(0, 3) + "-" + d.slice(3, 6) + "-" + d.slice(6);
+        return d.slice(0, 3) + "-" + d.slice(3, 7) + "-" + d.slice(7, 11);
+      }
+      if (d.startsWith("02")) {
+        if (d.length <= 5) return d.slice(0, 2) + "-" + d.slice(2);
+        if (d.length <= 9) return d.slice(0, 2) + "-" + d.slice(2, 5) + "-" + d.slice(5);
+        return d.slice(0, 2) + "-" + d.slice(2, 6) + "-" + d.slice(6, 10);
+      }
+      if (d.length <= 6) return d.slice(0, 3) + "-" + d.slice(3);
+      if (d.length <= 10) return d.slice(0, 3) + "-" + d.slice(3, 6) + "-" + d.slice(6);
+      return d.slice(0, 3) + "-" + d.slice(3, 7) + "-" + d.slice(7, 11);
+    }
+    function validatePhone(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#phone");
+      const v = el?.value.trim() ?? "";
+      const digits = v.replace(/\D/g, "");
+      if (!digits) return messages.phone || "연락처를 입력해주세요.";
+      if (!validPhone(v)) return messages.phoneFormat || "연락처 형식을 확인해주세요.";
+      return "";
+    }
+    function validateEmail(): string {
+      const el = formEl.querySelector<HTMLInputElement>("#email");
+      const v = el?.value.trim();
+      if (!v) return messages.email || "이메일을 입력해주세요.";
+      if (!emailRegex.test(v)) return messages.emailFormat || "이메일 주소를 확인해주십시오.";
+      return "";
+    }
+    function validatePrivacy(): string {
+      const el = formEl.querySelector<HTMLInputElement>('input[name="privacy_consent"]');
+      return el?.checked ? "" : (messages.privacy || "개인정보 수집에 동의해주세요.");
+    }
+
+    const validators: Record<string, () => string> = {
+      visit_path: validateVisitPath,
+      project_name: validateProjectName,
+      project_type: validateProjectType,
+      project_detail: validateProjectDetail,
+      budget: validateBudget,
+      due_date: validateDueDate,
+      name: validateName,
+      phone: validatePhone,
+      email: validateEmail,
+      privacy: validatePrivacy,
+    };
+
+    function validateOne(fieldId: string) {
+      const fn = validators[fieldId];
+      if (fn) setError(fieldId, fn());
+    }
+
+    ["visit_path", "project_name", "project_type", "project_detail", "budget", "due_date", "name", "phone", "email", "privacy_consent"].forEach((nameOrId) => {
+      const fieldId = nameOrId === "privacy_consent" ? "privacy" : nameOrId;
+      const sel = nameOrId === "visit_path" || nameOrId === "project_type"
+        ? 'input[name="' + nameOrId + '"]'
+        : nameOrId === "privacy_consent"
+          ? 'input[name="privacy_consent"]'
+          : "#" + nameOrId;
+      const inputs = formEl.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>(sel);
+      inputs.forEach((input) => {
+        if (nameOrId === "budget") {
+          input.addEventListener("input", function (this: HTMLInputElement) {
+            this.value = this.value.replace(/\D/g, "");
+            validateOne(fieldId);
+          });
+        }
+        if (nameOrId === "phone") {
+          input.addEventListener("input", function (this: HTMLInputElement) {
+            this.value = formatPhoneWithHyphen(this.value);
+            validateOne(fieldId);
+          });
+        }
+        input.addEventListener("blur", () => validateOne(fieldId));
+        input.addEventListener("input", () => { if (nameOrId !== "budget" && nameOrId !== "phone") validateOne(fieldId); });
+        input.addEventListener("change", () => validateOne(fieldId));
+      });
+    });
+  })();
+</script>
