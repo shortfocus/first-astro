@@ -59,7 +59,7 @@ export default function HeroCanvas() {
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setClearColor(0x0d0d0d, 1);
+    renderer.setClearColor(0xffffff, 1);
     container.appendChild(renderer.domElement);
 
     const blockGeometry = new THREE.BoxGeometry(BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
